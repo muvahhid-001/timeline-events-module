@@ -1,0 +1,21 @@
+.header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12.5rem;
+  font-family: "PT Sans Bold";
+  display: flex;
+  width: 100%;
+  max-width: 60.8rem;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: -1;
+}
+.headerFirstYear {
+  color: #5d5fef;
+}
+
+.headerLastYear {
+  color: #ef5da8;
+}
