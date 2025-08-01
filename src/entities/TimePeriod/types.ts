@@ -1,6 +1,7 @@
 export interface YearPoint {
   id: number;
-  year: number;
+  firstYear: number;
+  lastYear: number;
 }
 
 export interface TimeCircleSwitcherProps {

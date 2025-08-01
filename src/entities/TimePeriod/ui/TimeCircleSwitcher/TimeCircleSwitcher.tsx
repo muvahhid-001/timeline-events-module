@@ -8,7 +8,15 @@ const CIRCLE_SIZE_PX = 33.5 * 16;
 const RADIUS = CIRCLE_SIZE_PX / 2;
 const ANGLE_OFFSET = 45;
 
-export const TimeCircleSwitcher = ({ years }: { years: YearPoint[] }) => {
+interface TimeCircleSwitcherProps {
+  years: YearPoint[];
+  onChangePeriod?: (period: YearPoint) => void;
+}
+
+export const TimeCircleSwitcher = ({
+  years,
+  onChangePeriod,
+}: TimeCircleSwitcherProps) => {
   if (years.length === 0) return null;
 
   const circleRef = useRef<HTMLDivElement>(null);
@@ -45,7 +53,11 @@ export const TimeCircleSwitcher = ({ years }: { years: YearPoint[] }) => {
                 index === activeIndex ? styles.active : ""
               }`}
               style={{ left: `${x}px`, top: `${y}px` }}
-              onClick={() => handleClick(index)}
+              onClick={() => {
+                handleClick(index);
+                setActiveIndex(index);
+                onChangePeriod?.(years[index]);
+              }}
             >
               <div className={styles.wrapperHitbox}>
                 <div className={styles.wrapperPointInner}>

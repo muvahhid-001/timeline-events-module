@@ -1,9 +1,14 @@
+import { FC } from "react";
 import styles from "./TimeControlButton.module.scss";
 
-const TimeControlButton = ({ onClick }: { onClick: () => void }) => (
+const TimeControlButton: FC = () => (
   <nav className={styles.navigateTime}>
-    <p>06/06</p>
-    <button>{"<"}</button>
-    <button>{">"}</button>
+    <p className={styles.navigateTimeParagraph}>06/06</p>
+    <div className={styles.navigateTimeButtonBlock}>
+      <button className={styles.navigateTimeButton}>{"<"}</button>
+      <button className={styles.navigateTimeButton}>{">"}</button>
+    </div>
   </nav>
 );
+
+export default TimeControlButton;

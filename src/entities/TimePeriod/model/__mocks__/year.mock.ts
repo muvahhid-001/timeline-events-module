@@ -1,8 +1,8 @@
 export const mockYears = [
-  { id: 0, year: 2018 },
-  { id: 1, year: 2019 },
-  { id: 2, year: 2020 },
-  { id: 3, year: 2021 },
-  { id: 4, year: 2022 },
-  { id: 5, year: 2023 },
+  { id: 0, firstYear: 2018, lastYear: 2018 },
+  { id: 1, firstYear: 2000, lastYear: 2043 },
+  { id: 2, firstYear: 2004, lastYear: 2054 },
+  { id: 3, firstYear: 2010, lastYear: 2078 },
+  { id: 4, firstYear: 2026, lastYear: 2096 },
+  { id: 5, firstYear: 2058, lastYear: 2123 },
 ];
