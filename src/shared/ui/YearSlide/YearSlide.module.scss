@@ -1,0 +1,39 @@
+:global {
+  .swiper-slide {
+    padding: 0 !important;
+  }
+}
+
+.slide {
+  width: 100%;
+  height: 8.43rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: end;
+  transition: all 0.3s ease;
+}
+
+.year {
+  font-family: "Bebas Neue";
+  color: #3877ee;
+  font-size: 1.56rem;
+  text-align: left;
+  width: 100%;
+}
+
+.description {
+  font-family: "PT Sans";
+  color: #42567a;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  text-align: left;
+  width: 100%;
+}
+
+.slideContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}

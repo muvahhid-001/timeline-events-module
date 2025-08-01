@@ -1,7 +1,7 @@
 import TimelineModule from "@/widgets/TimelineModule/ui/TimelineModule";
 
 import "./App.scss";
-import "@/assets/fonts/PTSans/PTSans.css";
+import "@/assets/fonts/fonts";
 
 const App = () => {
   return (

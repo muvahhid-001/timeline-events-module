@@ -1,8 +1,43 @@
 export const mockYears = [
-  { id: 0, firstYear: 2018, lastYear: 2018 },
-  { id: 1, firstYear: 2000, lastYear: 2043 },
-  { id: 2, firstYear: 2004, lastYear: 2054 },
-  { id: 3, firstYear: 2010, lastYear: 2078 },
-  { id: 4, firstYear: 2026, lastYear: 2096 },
-  { id: 5, firstYear: 2058, lastYear: 2123 },
+  {
+    id: 0,
+    firstYear: 2018,
+    lastYear: 2018,
+    description:
+      "13 сентября — частное солнечное затмение, видимое в Южной Африке и части Антарктиды",
+  },
+  {
+    id: 1,
+    firstYear: 2000,
+    lastYear: 2043,
+    description:
+      "Телескоп «Хаббл» обнаружил самую удалённую из всех обнаруженных галактик, получившую обозначение GN-z11",
+  },
+  {
+    id: 2,
+    firstYear: 2004,
+    lastYear: 2054,
+    description:
+      "Компания Tesla официально представила первый в мире электрический грузовик Tesla Semi",
+  },
+  {
+    id: 3,
+    firstYear: 2010,
+    lastYear: 2078,
+    description:
+      "Рост инноваций, устойчивого развития и космических исследований",
+  },
+  {
+    id: 4,
+    firstYear: 2026,
+    lastYear: 2096,
+    description: "Будущее урбанизации и искусственного интеллекта",
+  },
+  {
+    id: 5,
+    firstYear: 2058,
+    lastYear: 2123,
+    description:
+      "Гипотетическое будущее: колонизация, биотехнологии и новый уклад",
+  },
 ];

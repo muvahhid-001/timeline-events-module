@@ -1,0 +1,14 @@
+.wrapper {
+  position: absolute;
+  bottom: 6.5rem;
+  left: 5rem;
+  width: 100%;
+  max-width: 82rem;
+  min-width: 82rem;
+}
+
+:global {
+  .swiper-slide {
+    padding: 0 !important;
+  }
+}
