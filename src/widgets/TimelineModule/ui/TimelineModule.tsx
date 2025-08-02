@@ -1,59 +1,40 @@
-import { FC, useState, useMemo } from "react";
+import { FC } from "react";
+
+import { useTimePeriod } from "@/widgets/TimelineModule/lib/useTimePeriod";
 import styles from "./TimelineModule.module.scss";
-import { mockYears } from "@/entities/TimePeriod/model/__mocks__/year.mock";
-import TimePeriodSwiper from "@/features/timePeriodControl/TimePeriodSwiper/TimePeriodSwiper";
-import TimePeriodNavigate from "@/features/timePeriodControl/TimePeriodNavigate/TimePeriodNavigate";
+import { TimeCircleSwitcher } from "@/features/timePeriodControl/TimeCircleSwitcher/ui/TimeCircleSwitcher";
+import TimePeriodNavigate from "@/features/timePeriodControl/TimePeriodNavigate/ui/TimePeriodNavigate";
 import TimeControlButton from "@/features/timePeriodControl/TimeControlButton/TimeControlButton";
-import { TimeCircleSwitcher } from "@/features/timePeriodControl/TimeCircleSwitcher/TimeCircleSwitcher";
+import { TimePeriodSwiper } from "@/features/timePeriodControl/TimePeriodSwiper";
 
 const TimelineModule: FC = () => {
-  const [activePeriod, setActivePeriod] = useState(mockYears[0]);
-
-  const currentIndex = useMemo(
-    () => mockYears.findIndex((y) => y.id === activePeriod.id),
-    [activePeriod]
-  );
-
-  const reorderedYears = useMemo(
-    () => [activePeriod, ...mockYears.filter((y) => y.id !== activePeriod.id)],
-    [activePeriod]
-  );
-
-  const handleChange = (period: typeof activePeriod) => {
-    setActivePeriod(period);
-  };
-
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setActivePeriod(mockYears[currentIndex - 1]);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentIndex < mockYears.length - 1) {
-      setActivePeriod(mockYears[currentIndex + 1]);
-    }
-  };
+  const {
+    activePeriod,
+    currentIndex,
+    reorderedYears,
+    handleChange,
+    handlePrev,
+    handleNext,
+    total,
+    setActiveById,
+  } = useTimePeriod();
 
   return (
     <section className={styles.section}>
       <h2 className={styles.sectionTitle}>Исторические даты</h2>
       <TimeCircleSwitcher
-        years={mockYears}
+        years={reorderedYears}
         activeId={activePeriod.id}
-        onSelect={(id) => {
-          const next = mockYears.find((y) => y.id === id);
-          if (next) setActivePeriod(next);
-        }}
+        onSelect={setActiveById}
       />
       <TimePeriodNavigate period={activePeriod} />
       <TimeControlButton
         current={currentIndex + 1}
-        total={mockYears.length}
+        total={total}
         onPrev={handlePrev}
         onNext={handleNext}
         isPrevDisabled={currentIndex === 0}
-        isNextDisabled={currentIndex === mockYears.length - 1}
+        isNextDisabled={currentIndex === total - 1}
       />
       <TimePeriodSwiper
         years={reorderedYears}

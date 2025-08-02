@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./TimeCircleSwitcher.module.scss";
 import { YearPoint } from "@/entities/TimePeriod/types";
-import { useCircleUpdate } from "@/entities/TimePeriod/model/hooks/useCircleUpdate";
-import { useCircleClick } from "@/entities/TimePeriod/model/hooks/useCircleClick";
+import { useCircleUpdate } from "@/features/timePeriodControl/TimeCircleSwitcher/lib/useCircleUpdate";
+import { useCircleClick } from "@/features/timePeriodControl/TimeCircleSwitcher/lib/useCircleClick";
 
 const CIRCLE_SIZE_PX = 33.5 * 16;
 const RADIUS = CIRCLE_SIZE_PX / 2;
@@ -38,15 +38,18 @@ export const TimeCircleSwitcher = ({
     tweenRef
   );
 
-  spansRef.current = [];
-
   useEffect(() => {
     const index = years.findIndex((y) => y.id === activeId);
     if (index !== -1 && index !== activeIndex) {
-      handleClick(index);
       setActiveIndex(index);
     }
-  }, [activeId]);
+  }, [activeId, activeIndex, years]);
+
+  useEffect(() => {
+    if (activeIndex !== -1) {
+      handleClick(activeIndex);
+    }
+  }, [activeIndex, handleClick]);
 
   return (
     <nav className={styles.wrapper}>
@@ -64,7 +67,6 @@ export const TimeCircleSwitcher = ({
               }`}
               style={{ left: `${x}px`, top: `${y}px` }}
               onClick={() => {
-                handleClick(index);
                 setActiveIndex(index);
                 onSelect?.(item.id);
               }}
