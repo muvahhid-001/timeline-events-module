@@ -9,6 +9,8 @@ import { TimeCircleSwitcher } from "@/features/timePeriodControl/TimeCircleSwitc
 const TimelineModule: FC = () => {
   const [activePeriod, setActivePeriod] = useState(mockYears[0]);
 
+  const currentIndex = mockYears.findIndex((y) => y.id === activePeriod.id);
+
   const reorderedYears = [
     activePeriod,
     ...mockYears.filter((y) => y.id !== activePeriod.id),
@@ -18,12 +20,31 @@ const TimelineModule: FC = () => {
     setActivePeriod(period);
   };
 
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setActivePeriod(mockYears[currentIndex - 1]);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentIndex < mockYears.length - 1) {
+      setActivePeriod(mockYears[currentIndex + 1]);
+    }
+  };
+
   return (
     <section className={styles.section}>
       <h2 className={styles.sectionTitle}>Исторические даты</h2>
       <TimeCircleSwitcher years={mockYears} onChangePeriod={setActivePeriod} />
       <TimePeriodNavigate period={activePeriod} />
-      <TimeControlButton />
+      <TimeControlButton
+        current={currentIndex + 1}
+        total={mockYears.length}
+        onPrev={handlePrev}
+        onNext={handleNext}
+        isPrevDisabled={currentIndex === 0}
+        isNextDisabled={currentIndex === mockYears.length - 1}
+      />
       <TimePeriodSwiper
         years={reorderedYears}
         activeId={activePeriod.id}

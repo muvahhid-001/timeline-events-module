@@ -31,3 +31,7 @@
   width: 7.5rem;
   justify-content: space-between;
 }
+.navigateTimeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
