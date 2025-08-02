@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./TimeCircleSwitcher.module.scss";
 import { YearPoint } from "@/entities/TimePeriod/types";
 import { useCircleUpdate } from "@/entities/TimePeriod/model/hooks/useCircleUpdate";
@@ -10,21 +10,23 @@ const ANGLE_OFFSET = 45;
 
 interface TimeCircleSwitcherProps {
   years: YearPoint[];
-  onChangePeriod?: (period: YearPoint) => void;
+  activeId: number;
+  onSelect?: (id: number) => void;
 }
 
 export const TimeCircleSwitcher = ({
   years,
-  onChangePeriod,
+  activeId,
+  onSelect,
 }: TimeCircleSwitcherProps) => {
-  if (years.length === 0) return null;
-
   const circleRef = useRef<HTMLDivElement>(null);
   const spansRef = useRef<HTMLSpanElement[]>([]);
-  const rotation = useRef<{ value: number } | null>({ value: 0 });
+  const rotation = useRef<{ value: number }>({ value: 0 });
   const targetRotation = useRef(0);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(
+    years.findIndex((y) => y.id === activeId)
+  );
   const angleStep = 360 / years.length;
 
   useCircleUpdate(circleRef, spansRef, rotation);
@@ -37,6 +39,14 @@ export const TimeCircleSwitcher = ({
   );
 
   spansRef.current = [];
+
+  useEffect(() => {
+    const index = years.findIndex((y) => y.id === activeId);
+    if (index !== -1 && index !== activeIndex) {
+      handleClick(index);
+      setActiveIndex(index);
+    }
+  }, [activeId]);
 
   return (
     <nav className={styles.wrapper}>
@@ -56,7 +66,7 @@ export const TimeCircleSwitcher = ({
               onClick={() => {
                 handleClick(index);
                 setActiveIndex(index);
-                onChangePeriod?.(years[index]);
+                onSelect?.(item.id);
               }}
             >
               <div className={styles.wrapperHitbox}>

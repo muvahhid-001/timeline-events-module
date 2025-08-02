@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useMemo } from "react";
 import styles from "./TimelineModule.module.scss";
 import { mockYears } from "@/entities/TimePeriod/model/__mocks__/year.mock";
 import TimePeriodSwiper from "@/features/timePeriodControl/TimePeriodSwiper/TimePeriodSwiper";
@@ -9,12 +9,15 @@ import { TimeCircleSwitcher } from "@/features/timePeriodControl/TimeCircleSwitc
 const TimelineModule: FC = () => {
   const [activePeriod, setActivePeriod] = useState(mockYears[0]);
 
-  const currentIndex = mockYears.findIndex((y) => y.id === activePeriod.id);
+  const currentIndex = useMemo(
+    () => mockYears.findIndex((y) => y.id === activePeriod.id),
+    [activePeriod]
+  );
 
-  const reorderedYears = [
-    activePeriod,
-    ...mockYears.filter((y) => y.id !== activePeriod.id),
-  ];
+  const reorderedYears = useMemo(
+    () => [activePeriod, ...mockYears.filter((y) => y.id !== activePeriod.id)],
+    [activePeriod]
+  );
 
   const handleChange = (period: typeof activePeriod) => {
     setActivePeriod(period);
@@ -35,7 +38,14 @@ const TimelineModule: FC = () => {
   return (
     <section className={styles.section}>
       <h2 className={styles.sectionTitle}>Исторические даты</h2>
-      <TimeCircleSwitcher years={mockYears} onChangePeriod={setActivePeriod} />
+      <TimeCircleSwitcher
+        years={mockYears}
+        activeId={activePeriod.id}
+        onSelect={(id) => {
+          const next = mockYears.find((y) => y.id === id);
+          if (next) setActivePeriod(next);
+        }}
+      />
       <TimePeriodNavigate period={activePeriod} />
       <TimeControlButton
         current={currentIndex + 1}

@@ -35,3 +35,18 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+@media (max-width: 900px) {
+  .navigateTime {
+    bottom: 0;
+  }
+  .navigateTimeButton {
+    width: 1.56rem;
+    height: 1.56rem;
+    font-size: 1rem;
+  }
+  .navigateTimeButtonBlock {
+    width: 100%;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+}

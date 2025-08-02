@@ -15,7 +15,26 @@
 .headerFirstYear {
   color: #5d5fef;
 }
-
 .headerLastYear {
   color: #ef5da8;
+}
+@media (max-width: 1150px) {
+  .header {
+    justify-content: center;
+    gap: 2rem;
+    font-size: 8.5rem;
+    top: 23.4%;
+  }
+}
+@media (max-width: 900px) {
+  .header {
+    top: calc(7vw + 35px);
+    font-size: clamp(3.5rem, 10vw, 12.5rem);
+  }
+  .headerFirstYear {
+    color: #3877ee;
+  }
+  .headerLastYear {
+    color: #f178b6;
+  }
 }

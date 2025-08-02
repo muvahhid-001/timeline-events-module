@@ -26,9 +26,39 @@ const TimePeriodSwiper: FC<Props> = ({ years, activeId, onChange }) => {
   const prevActiveIdRef = useRef<number>(activeId);
   const [internalActiveId, setInternalActiveId] = useState(activeId);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+  const [slidesPerView, setSlidesPerView] = useState(
+    window.innerWidth <= 900 ? 2 : 3
+  );
 
   const handleSwiperInit = useCallback((instance: SwiperType) => {
     swiperRef.current = instance;
+    setIsBeginning(instance.isBeginning);
+    setIsEnd(instance.isEnd);
+  }, []);
+
+  const handleSlideChange = useCallback(() => {
+    if (!swiperRef.current) return;
+    setIsBeginning(swiperRef.current.isBeginning);
+    setIsEnd(swiperRef.current.isEnd);
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    swiperRef.current?.slidePrev();
+  }, []);
+
+  const handleNext = useCallback(() => {
+    swiperRef.current?.slideNext();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSlidesPerView(window.innerWidth <= 900 ? 2 : 3);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -41,6 +71,10 @@ const TimePeriodSwiper: FC<Props> = ({ years, activeId, onChange }) => {
       setInternalActiveId(activeId);
       swiperRef.current?.slideTo(0);
       prevActiveIdRef.current = activeId;
+
+      setIsBeginning(true);
+      setIsEnd(swiperRef.current?.isEnd ?? false);
+
       setIsAnimating(false);
     };
 
@@ -68,14 +102,33 @@ const TimePeriodSwiper: FC<Props> = ({ years, activeId, onChange }) => {
         className={styles.swiperWrapper}
         style={{ opacity: isAnimating ? 0 : 1 }}
       >
+        {!isBeginning && (
+          <button
+            onClick={handlePrev}
+            className={`${styles.navButton} ${styles.left}`}
+          >
+            {"<"}
+          </button>
+        )}
+
         <Swiper
           spaceBetween={20}
-          slidesPerView={3}
+          slidesPerView={slidesPerView}
           onSwiper={handleSwiperInit}
+          onSlideChange={handleSlideChange}
           className={styles.swiper}
         >
           {mappedSlides}
         </Swiper>
+
+        {!isEnd && (
+          <button
+            onClick={handleNext}
+            className={`${styles.navButton} ${styles.right}`}
+          >
+            {">"}
+          </button>
+        )}
       </div>
     </div>
   );

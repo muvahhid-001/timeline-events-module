@@ -1,14 +1,57 @@
-.wrapper {
-  position: absolute;
-  bottom: 6.5rem;
-  left: 5rem;
-  width: 100%;
-  max-width: 82rem;
-  min-width: 82rem;
-}
-
 :global {
   .swiper-slide {
     padding: 0 !important;
+  }
+}
+.wrapper {
+  position: absolute;
+  bottom: 4rem;
+  left: 4rem;
+  width: 100%;
+  height: 12rem;
+  width: calc(100% - 10rem);
+  max-width: 82rem;
+}
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #3877ee;
+  font-family: Calibri, "Trebuchet MS";
+  background: #fff;
+  border: none;
+  font-size: 1.6rem;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 5px 1.5px rgba(56, 119, 238, 0.25);
+
+  &.left {
+    left: -3rem;
+  }
+
+  &.right {
+    right: -3rem;
+  }
+}
+@media (max-width: 900px) {
+  .wrapper {
+    width: calc(100% - 4rem);
+    left: 2rem;
+    bottom: calc(43rem - 22vw);
+  }
+}
+@media (max-width: 600px) {
+  .navButton {
+    display: none;
+  }
+  .wrapper {
+    width: calc(100% - 2rem);
+    left: 0;
   }
 }

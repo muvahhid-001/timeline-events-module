@@ -36,7 +36,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
   color: #42567a;
 }
 
@@ -69,4 +68,9 @@
 .wrapperPoint:hover .wrapperPointInner span,
 .wrapperPoint.active .wrapperPointInner span {
   opacity: 1;
+}
+@media (max-width: 900px) {
+  .wrapperCircle {
+    display: none;
+  }
 }
