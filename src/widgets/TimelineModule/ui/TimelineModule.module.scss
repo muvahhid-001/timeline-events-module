@@ -80,23 +80,30 @@
       content: none;
     }
     &::after {
-      top: calc(11% + 25vw);
+      top: 19rem;
     }
   }
   .sectionTitle {
     width: calc(25vw + 10px);
     padding-left: 0;
     top: calc(7vw + -20px);
-    font-size: clamp(1.25rem, 4vw, 3rem);
+    font-size: clamp(1.25rem, 5vw, 3rem);
     &::before {
       content: none;
     }
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 550px) {
   .section {
     &::after {
-      top: calc(18% + 10vw);
+      top: 17rem;
+    }
+  }
+}
+@media (max-width: 360px) {
+  .section {
+    &::after {
+      top: 15rem;
     }
   }
 }

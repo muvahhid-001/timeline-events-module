@@ -37,7 +37,12 @@
 }
 @media (max-width: 900px) {
   .navigateTime {
-    bottom: 0;
+    top: 30.6rem;
+  }
+}
+@media (max-width: 600px) {
+  .navigateTime {
+    left: 1rem;
   }
   .navigateTimeButton {
     width: 1.56rem;

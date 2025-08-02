@@ -13,6 +13,8 @@ import { YearSlide } from "@/shared/ui/YearSlide/YearSlide";
 import { YearPoint } from "@/entities/TimePeriod/types";
 import styles from "./TimePeriodSwiper.module.scss";
 import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
 
 interface Props {
   years: YearPoint[];
@@ -36,6 +38,9 @@ const TimePeriodSwiper: FC<Props> = ({ years, activeId, onChange }) => {
     swiperRef.current = instance;
     setIsBeginning(instance.isBeginning);
     setIsEnd(instance.isEnd);
+    instance.update();
+    instance.pagination?.render();
+    instance.pagination?.update();
   }, []);
 
   const handleSlideChange = useCallback(() => {
@@ -70,11 +75,12 @@ const TimePeriodSwiper: FC<Props> = ({ years, activeId, onChange }) => {
       await switchFadeAnimation(wrapper);
       setInternalActiveId(activeId);
       swiperRef.current?.slideTo(0);
+      swiperRef.current?.update();
+      swiperRef.current?.pagination?.render();
+      swiperRef.current?.pagination?.update();
       prevActiveIdRef.current = activeId;
-
       setIsBeginning(true);
       setIsEnd(swiperRef.current?.isEnd ?? false);
-
       setIsAnimating(false);
     };
 
@@ -110,17 +116,20 @@ const TimePeriodSwiper: FC<Props> = ({ years, activeId, onChange }) => {
             {"<"}
           </button>
         )}
-
         <Swiper
+          key={slidesPerView}
           spaceBetween={20}
           slidesPerView={slidesPerView}
           onSwiper={handleSwiperInit}
           onSlideChange={handleSlideChange}
+          modules={[Pagination]}
+          pagination={{ clickable: true, el: ".swiper-pagination" }}
+          observeParents
+          watchSlidesProgress
           className={styles.swiper}
         >
           {mappedSlides}
         </Swiper>
-
         {!isEnd && (
           <button
             onClick={handleNext}
@@ -130,6 +139,7 @@ const TimePeriodSwiper: FC<Props> = ({ years, activeId, onChange }) => {
           </button>
         )}
       </div>
+      <div className="swiper-pagination" />
     </div>
   );
 };
