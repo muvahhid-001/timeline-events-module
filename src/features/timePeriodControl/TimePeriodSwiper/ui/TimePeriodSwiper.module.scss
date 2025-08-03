@@ -48,35 +48,47 @@
     }
   }
 }
+
 @media (max-width: 900px) {
   :global {
     .swiper {
       position: static !important;
     }
-
-    .swiper-pagination {
-      position: absolute !important;
-      top: 15rem !important;
-    }
   }
+
   .wrapper {
     position: relative;
+    height: 16.7rem;
     width: calc(90% - 3rem);
     top: 19.5rem;
   }
 }
+
 @media (max-width: 600px) {
   .wrapper {
     position: relative;
     width: calc(100% - 1rem);
     left: 0;
   }
+
   .navButton {
     display: none;
   }
+
   :global {
     .swiper-pagination {
-      top: 14rem !important;
+      position: fixed !important;
+      bottom: 2rem !important;
+      left: 0 !important;
+      width: 100% !important;
+      text-align: center !important;
+      z-index: 9999 !important;
     }
+  }
+}
+
+@media (max-width: 360px) {
+  .wrapper {
+    top: 16rem;
   }
 }

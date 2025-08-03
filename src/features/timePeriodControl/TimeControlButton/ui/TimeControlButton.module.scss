@@ -3,6 +3,7 @@
   top: 43.5rem;
   left: 5rem;
 }
+
 .navigateTimeButton {
   cursor: pointer;
   border-width: 1px;
@@ -17,38 +18,50 @@
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;
+
   &:hover {
     background-color: #fff;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
+
 .navigateTimeParagraph {
   font-family: "PT Sans";
   font-size: 0.875rem;
   color: #42567a;
 }
+
 .navigateTimeButtonBlock {
   display: flex;
   width: 7.5rem;
   justify-content: space-between;
 }
-.navigateTimeButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+
 @media (max-width: 900px) {
   .navigateTime {
     top: 30.6rem;
   }
 }
+
 @media (max-width: 600px) {
   .navigateTime {
+    position: fixed;
+    top: auto;
+    bottom: calc(2% + (calc(8px + 11px)));
     left: 1rem;
+    z-index: 9999;
   }
+
   .navigateTimeButton {
     width: 1.56rem;
     height: 1.56rem;
     font-size: 1rem;
   }
+
   .navigateTimeButtonBlock {
     width: 100%;
     justify-content: center;
