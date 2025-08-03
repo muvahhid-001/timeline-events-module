@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -80,6 +82,7 @@ module.exports = {
     ...(!isDev
       ? [new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })]
       : []),
+    new BundleAnalyzerPlugin(),
   ],
 
   devtool: isDev ? "inline-source-map" : false,
