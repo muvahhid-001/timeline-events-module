@@ -81,7 +81,7 @@ module.exports = {
     ...(!isDev
       ? [new MiniCssExtractPlugin({ filename: "[name].[contenthash].css" })]
       : []),
-    new BundleAnalyzerPlugin(),
+    ...(process.env.ANALYZE === "true" ? [new BundleAnalyzerPlugin()] : []),
   ],
 
   devtool: isDev ? "inline-source-map" : false,
