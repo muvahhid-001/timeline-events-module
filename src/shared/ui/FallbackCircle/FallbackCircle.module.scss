@@ -1,12 +1,11 @@
 .fallbackCircleWrapper {
   position: absolute;
-  bottom: 5%;
+  top: 55rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
 }
 
 .fallbackCircle {
@@ -23,9 +22,18 @@
     transform: rotate(360deg);
   }
 }
-
 @media (max-width: 900px) {
   .fallbackCircleWrapper {
-    bottom: 45%;
+    top: 23rem;
+  }
+}
+@media (max-width: 600px) {
+  .fallbackCircleWrapper {
+    top: 22rem;
+  }
+}
+@media (max-width: 360px) {
+  .fallbackCircleWrapper {
+    top: 19rem;
   }
 }
