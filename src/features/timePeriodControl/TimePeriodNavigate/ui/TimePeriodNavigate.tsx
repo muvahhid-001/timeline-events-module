@@ -1,8 +1,8 @@
 import { FC } from "react";
 import styles from "./TimePeriodNavigate.module.scss";
-import { useSmoothNumber } from "@/entities/TimePeriod/lib/useSmoothNumber";
+import { useSmoothNumber } from "@/features/timePeriodControl/TimePeriodNavigate/lib/useSmoothNumber";
 
-const TimePeriodNavigate: FC<{
+export const TimePeriodNavigate: FC<{
   period: { firstYear: number; lastYear: number };
 }> = ({ period }) => {
   const first = useSmoothNumber(period.firstYear);
@@ -15,5 +15,3 @@ const TimePeriodNavigate: FC<{
     </div>
   );
 };
-
-export default TimePeriodNavigate;

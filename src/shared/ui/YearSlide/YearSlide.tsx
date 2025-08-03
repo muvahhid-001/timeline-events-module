@@ -1,5 +1,4 @@
 import React from "react";
-import { SwiperSlide } from "swiper/react";
 import styles from "./YearSlide.module.scss";
 import { YearPoint } from "@/entities/TimePeriod/types";
 

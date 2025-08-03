@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC, memo } from "react";
 import styles from "./TimeControlButton.module.scss";
 
 interface Props {
@@ -40,4 +40,5 @@ const TimeControlButton: FC<Props> = ({
     </div>
   </nav>
 );
-export default TimeControlButton;
+
+export default memo(TimeControlButton);

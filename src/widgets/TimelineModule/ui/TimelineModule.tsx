@@ -1,10 +1,15 @@
-import { FC, useState, useMemo } from "react";
+import { FC, useState, useMemo, Suspense, lazy } from "react";
 import styles from "./TimelineModule.module.scss";
 import { mockYears } from "@/entities/TimePeriod/model/__mocks__/year.mock";
-import TimePeriodSwiper from "@/features/timePeriodControl/TimePeriodSwiper/TimePeriodSwiper";
-import TimePeriodNavigate from "@/features/timePeriodControl/TimePeriodNavigate/TimePeriodNavigate";
-import TimeControlButton from "@/features/timePeriodControl/TimeControlButton/TimeControlButton";
-import { TimeCircleSwitcher } from "@/features/timePeriodControl/TimeCircleSwitcher/TimeCircleSwitcher";
+import { FallbackCircle } from "@/shared/ui/FallbackCircle/FallbackCircle";
+import TimeCircleSwitcher from "@/features/timePeriodControl/TimeCircleSwitcher/ui/TimeCircleSwitcher";
+import { TimePeriodNavigate } from "@/features/timePeriodControl/TimePeriodNavigate/ui/TimePeriodNavigate";
+import TimeControlButton from "@/features/timePeriodControl/TimeControlButton/ui/TimeControlButton";
+
+const TimePeriodSwiper = lazy(
+  () =>
+    import("@/features/timePeriodControl/TimePeriodSwiper/ui/TimePeriodSwiper")
+);
 
 const TimelineModule: FC = () => {
   const [activePeriod, setActivePeriod] = useState(mockYears[0]);
@@ -55,11 +60,13 @@ const TimelineModule: FC = () => {
         isPrevDisabled={currentIndex === 0}
         isNextDisabled={currentIndex === mockYears.length - 1}
       />
-      <TimePeriodSwiper
-        years={reorderedYears}
-        activeId={activePeriod.id}
-        onChange={handleChange}
-      />
+      <Suspense fallback={<FallbackCircle />}>
+        <TimePeriodSwiper
+          years={reorderedYears}
+          activeId={activePeriod.id}
+          onChange={handleChange}
+        />
+      </Suspense>
     </section>
   );
 };
