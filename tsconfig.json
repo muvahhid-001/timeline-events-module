@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
     "target": "es6",
+    "lib": ["DOM", "ES2017"],
     "module": "esnext",
     "jsx": "react-jsx",
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
     "baseUrl": "./src",
+    "types": ["jest", "@testing-library/jest-dom", "./global.d.ts"],
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@/*": ["*"]
